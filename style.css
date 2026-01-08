@@ -131,3 +131,26 @@ h1 {
     font-size: 1.2em;
   }
 }
+.lumora-products,
+.pendant-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.lumora-item,
+.pendant-grid figure {
+  text-align: center;
+}
+
+.lumora-item img,
+.pendant-grid img {
+  max-width: 100%;
+  border-radius: 6px;
+}
+
+.price {
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
