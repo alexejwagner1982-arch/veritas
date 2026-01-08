@@ -1,3 +1,29 @@
+#main-nav {
+  background-color: #050507;
+  border-bottom: 1px solid #D4AF37;
+  padding: 15px 0;
+  text-align: center;
+}
+
+#main-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  gap: 2.5rem;
+}
+
+#main-nav a {
+  color: #D4AF37;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+#main-nav a:hover {
+  color: #e0c878;
+}
 /* ===========================
    Grundlayout
 =========================== */
