@@ -64,3 +64,15 @@ footer a {
   color: #666;
   margin-right: 16px;
 }
+.veritas-marker {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 999;
+  opacity: 0.85;
+}
+
+.veritas-marker svg {
+  width: 42px;
+  height: 42px;
+}
