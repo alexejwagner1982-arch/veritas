@@ -1,71 +1,367 @@
-<!-- rebuild -->
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<title>VERITAS GENETICA</title>
-<meta name="description" content="Klarheit beginnt mit einem Marker. Tiefe beginnt mit Zugang.">
-<link rel="stylesheet" href="/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Tyraen – Klarheit. Ordnung. Bedeutung.</title>
+
+  <meta name="description" content="Tyraen ist ein bewusst gestaltetes Ritualsystem für Klarheit, Ordnung und persönliche Bedeutung. Ein ruhiger Moment zur Selbstreflexion, Entscheidungsfindung und inneren Sortierung.">
+
+  <style>
+    :root {
+      --bg: #f7f3ec;
+      --text: #1f2933;
+      --muted: #66717c;
+      --accent: #203846;
+      --gold: #b08a5a;
+      --card: #ffffff;
+      --line: #ded4c5;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    header {
+      padding: 26px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      background: rgba(247, 243, 236, 0.96);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 28px;
+      letter-spacing: 3px;
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    nav a {
+      margin-left: 24px;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    main {
+      width: 100%;
+    }
+
+    section {
+      padding: 70px 8%;
+      max-width: 1180px;
+      margin: auto;
+    }
+
+    .hero {
+      padding-top: 110px;
+      padding-bottom: 90px;
+    }
+
+    .label {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--gold);
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1.05;
+      margin: 0 0 24px;
+      color: var(--accent);
+      max-width: 900px;
+    }
+
+    h2 {
+      font-size: clamp(32px, 4vw, 46px);
+      color: var(--accent);
+      margin: 0 0 20px;
+    }
+
+    h3 {
+      font-size: 25px;
+      color: var(--accent);
+      margin-top: 0;
+    }
+
+    p {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 820px;
+    }
+
+    .lead {
+      font-size: 23px;
+      max-width: 760px;
+      margin-bottom: 36px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 14px 24px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+      font-size: 16px;
+    }
+
+    .button:hover {
+      background: #162a35;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 34px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 30px;
+      min-height: 210px;
+    }
+
+    .card p {
+      font-size: 17px;
+    }
+
+    .product {
+      background: #fff;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      max-width: none;
+    }
+
+    .product-inner {
+      max-width: 1180px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 42px;
+      align-items: start;
+    }
+
+    ul {
+      padding-left: 22px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .note {
+      margin-top: 26px;
+      padding: 18px 20px;
+      border-left: 4px solid var(--gold);
+      background: #faf7f1;
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 820px;
+    }
+
+    footer {
+      padding: 38px 8%;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 18px;
+    }
+
+    footer a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 850px) {
+      header {
+        display: block;
+      }
+
+      nav {
+        margin-top: 14px;
+      }
+
+      nav a {
+        margin-left: 0;
+        margin-right: 16px;
+        display: inline-block;
+        margin-top: 8px;
+      }
+
+      .grid,
+      .product-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 70px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  
-<div class="veritas-marker">
-  <svg viewBox="0 0 360 360" width="64" height="64" xmlns="http://www.w3.org/2000/svg">
-    <path fill="#0d0c0d" d="M 185.101562 72.601562 C 188.378906 73.980469 191.242188 77.8125 193.726562 80.324219 C 196.085938 82.75 196.085938 82.75 198.582031 85.03125 C 200.414062 86.59375 202.066406 88.347656 203.757812 90.054688 C 204.449219 90.753906 205.140625 91.453125 205.832031 92.152344 L 206.300781 92.628906 C 207.191406 93.523438 208.117188 94.316406 209.101562 95.101562 C 209.605469 95.59375 210.105469 96.09375 210.601562 96.601562 L 211.367188 97.371094 L 212.171875 98.183594 L 213.527344 99.546875 C 213.835938 99.855469 214.144531 100.164062 214.453125 100.476562 C 216.566406 102.613281 216.566406 102.613281 218.789062 104.636719 L 219.3125 105.101562 C 219.878906 105.601562 219.878906 105.601562 220.453125 105.980469 C 221.128906 106.507812 221.546875 106.96875 222 107.699219 C 222.347656 109.324219 222.355469 110.949219 222.382812 112.601562 C 222.394531 113.101562 222.410156 113.597656 222.425781 114.09375 C 222.46875 115.433594 222.5 116.773438 222.527344 118.113281 C 222.554688 119.519531 222.597656 120.925781 222.640625 122.332031 C 222.707031 124.640625 222.765625 126.945312 222.820312 129.25 C 222.890625 132.308594 222.976562 135.371094 223.0625 138.429688 L 223.144531 141.15625 L 223.160156 141.824219 C 223.207031 143.375 223.25 144.929688 223.292969 146.480469 C 223.425781 151.492188 223.585938 156.503906 223.78125 161.511719 C 224.058594 168.582031 224.308594 175.648438 224.550781 182.71875 L 224.578125 183.585938 C 224.871094 192.167969 225.121094 200.75 225.335938 209.332031 C 225.476562 214.945312 225.628906 220.554688 225.863281 226.164062 C 225.964844 228.605469 226.058594 231.046875 226.15625 233.488281 C 226.1875 234.289062 226.21875 235.085938 226.253906 235.882812 C 226.359375 238.519531 226.460938 241.15625 226.554688 243.792969 C 226.597656 244.992188 226.640625 246.191406 226.691406 247.390625 C 226.738281 248.515625 226.78125 249.640625 226.816406 250.765625 C 226.828125 251.183594 226.847656 251.601562 226.867188 252.019531 C 226.921875 253.222656 226.957031 254.402344 226.800781 255.601562 C 226.105469 256.5625 226.105469 256.5625 225.300781 257.101562 L 224.40625 257.882812 C 224.085938 258.15625 223.765625 258.425781 223.445312 258.695312 L 222.921875 259.132812 C 221.433594 260.378906 219.921875 261.59375 218.398438 262.800781 C 217.648438 263.398438 216.898438 264 216.148438 264.601562 C 214.125 266.222656 214.125 266.222656 213.113281 267.027344 C 210.195312 269.355469 207.296875 271.714844 204.414062 274.085938 C 203.1875 275.089844 201.949219 276.074219 200.699219 277.050781 C 198.539062 278.738281 196.40625 280.457031 194.316406 282.234375 Z"/>
-  </svg>
-</div>
 
-<main>
+  <header>
+    <div class="logo">TYRAEN</div>
+    <nav>
+      <a href="#system">System</a>
+      <a href="#ritualset">Ritualset</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </header>
 
-<section>
-  <h1>VERITAS GENETICA</h1>
-  <p>Klarheit beginnt mit einem Marker.<br>Tiefe beginnt mit Zugang.</p>
-  <a class="btn" href="/zugang">Zugang öffnen</a>
-</section>
+  <main>
 
-<section>
-  <h2>Was ist VERITAS?</h2>
-  <p>
-    VERITAS ist ein System für Klarheit.<br>
-    Ein Raum für Wahrheit.<br>
-    Ein Zugang zu dir selbst.
-  </p>
-  <p>Keine Esoterik.<br>Keine Erklärungen.<br>Nur Struktur.</p>
-</section>
+    <section class="hero">
+      <div class="label">Klarheit · Ordnung · Bedeutung</div>
+      <h1>Ein ruhiger Moment für klare Entscheidungen.</h1>
+      <p class="lead">
+        Tyraen ist ein bewusst gestaltetes Ritualsystem zur Selbstreflexion,
+        inneren Sortierung und bewussten Entscheidungsfindung.
+      </p>
+      <a class="button" href="#ritualset">Ritualset ansehen</a>
+    </section>
 
-<section>
-  <h2>Die Blüte</h2>
-  <p>Die Blüte ist kein Produkt.<br>Sie ist ein Schlüssel.</p>
-  <ul>
-    <li>Zugang zu VERITAS</li>
-    <li>Zugang zu Telegram Premium</li>
-    <li>Zugang zu Klarheit</li>
-  </ul>
-  <p>Limitierte Verfügbarkeit.</p>
-  <a class="btn" href="/bluete">Blüte öffnen</a>
-</section>
+    <section id="system">
+      <h2>Was ist Tyraen?</h2>
+      <p>
+        Tyraen verbindet Duft, Ritual, klare Fragen und strukturierte Anleitung
+        zu einem bewussten Moment der Ruhe. Es geht nicht um schnelle Versprechen,
+        sondern um einen einfachen Rahmen, um Gedanken zu ordnen und den nächsten
+        Schritt klarer zu erkennen.
+      </p>
 
-<section>
-  <h2>Prinzipien</h2>
-  <ul>
-    <li>Klarheit</li>
-    <li>Reduktion</li>
-    <li>Wahrheit</li>
-    <li>Struktur</li>
-    <li>Fokus</li>
-  </ul>
-</section>
+      <div class="grid">
+        <div class="card">
+          <h3>Klarheit</h3>
+          <p>
+            Ein kurzer, bewusster Ablauf, um aus innerer Unruhe herauszutreten
+            und wieder zu erkennen, was wirklich wichtig ist.
+          </p>
+        </div>
 
-<section>
-  <a class="btn" href="/zugang">Telegram Premium</a>
-</section>
+        <div class="card">
+          <h3>Ordnung</h3>
+          <p>
+            Strukturierte Fragen helfen, Optionen, Gefühle, Grenzen und konkrete
+            nächste Schritte voneinander zu trennen.
+          </p>
+        </div>
 
-<footer>
-  <a href="/impressum">Impressum</a>
-  <a href="/datenschutz">Datenschutz</a>
-</footer>
+        <div class="card">
+          <h3>Bedeutung</h3>
+          <p>
+            Entscheidungen werden nicht nur rational betrachtet, sondern mit
+            persönlicher Richtung und innerem Wert verbunden.
+          </p>
+        </div>
+      </div>
+    </section>
 
-</main>
+    <section id="ritualset" class="product">
+      <div class="product-inner">
+        <div>
+          <div class="label">Erstes Ritualset</div>
+          <h2>Tyraen Entscheidung</h2>
+          <p>
+            Ein hochwertiges Ritualset für Menschen, die vor einer Entscheidung
+            stehen und einen klaren, ruhigen Moment zur inneren Sortierung suchen.
+          </p>
+
+          <p>
+            Das Set ist als geführter Ablauf gedacht: Duft öffnen, zur Ruhe kommen,
+            Leitfrage wählen, Gedanken schriftlich ordnen und einen nächsten
+            konkreten Schritt formulieren.
+          </p>
+
+          <div class="note">
+            Tyraen ersetzt keine Therapie, keine medizinische Behandlung und keine
+            rechtliche, psychologische oder finanzielle Beratung. Tyraen ist ein
+            Reflexions- und Ritualsystem für bewusste Selbstklärung.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Inhalt</h3>
+          <ul>
+            <li>10 ml Duftöl zur Raumbeduftung</li>
+            <li>Ritualkarte mit Schritt-für-Schritt-Anleitung</li>
+            <li>Entscheidungsbogen zur Reflexion</li>
+            <li>Impulskarte</li>
+            <li>QR-Code zur Audioanleitung</li>
+            <li>Sicherheitshinweise</li>
+            <li>hochwertige Verpackung</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Für wen ist Tyraen gedacht?</h2>
+      <p>
+        Für Menschen, die sich überfordert, blockiert oder innerlich unsortiert
+        fühlen. Für Momente, in denen eine Entscheidung ansteht, aber der Kopf zu
+        laut ist. Für Menschen, die keinen weiteren Ratgeber brauchen, sondern
+        einen klaren, ruhigen Ablauf.
+      </p>
+    </section>
+
+    <section id="kontakt">
+      <h2>Kontakt</h2>
+      <p>
+        Tyraen befindet sich aktuell im Aufbau. Erste Ritualsets werden als kleine
+        Testserie vorbereitet.
+      </p>
+      <p>
+        Kontakt: <strong>info@tyraen.de</strong>
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <div>© 2026 Tyraen</div>
+    <div>
+      <a href="/impressum/">Impressum</a>
+      <a href="/datenschutz/">Datenschutz</a>
+    </div>
+  </footer>
+
 </body>
 </html>
