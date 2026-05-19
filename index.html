@@ -1,34 +1,36 @@
-<!DOCTYPE html>
+from pathlib import Path
+html = r'''<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ABENTEUERREISE by TYRAEN – Kindergeburtstag ohne stundenlange Planung</title>
+  <title>ABENTEUERREISE by TYRAEN – Drachen-Schatzsuche für Kindergeburtstage</title>
 
-  <meta name="description" content="Druckfertiges 66-Seiten-PDF für Kindergeburtstag, Schatzsuche und Schnitzeljagd. Drucken, schneiden, Umschläge packen und direkt spielen. Für Kinder ca. 5–8 Jahre.">
+  <meta name="description" content="Druckbares PDF-Set für Kindergeburtstage: Drachen-Schatzsuche mit sechs Toren, Story, Gruppenführer-Anleitung, Zeichenkarte, Ausweisen, Torblättern und Urkunde. Für Kinder ca. 5–9 Jahre.">
 
   <style>
     :root {
-      --bg: #f7f1e6;
-      --paper: #fffaf1;
-      --paper-strong: #f2eadb;
-      --text: #22313a;
-      --muted: #65737d;
-      --accent: #1f3b4d;
-      --accent-dark: #172b38;
-      --gold: #b48a45;
-      --gold-soft: #ead8b8;
-      --line: #dfd0b8;
-      --card: #ffffff;
-      --shadow: rgba(34, 49, 58, 0.08);
+      --bg-dark: #101014;
+      --bg-night: #17212a;
+      --parchment: #f4e3bf;
+      --parchment-light: #fff2cf;
+      --parchment-deep: #dec089;
+      --ink: #2d1b10;
+      --muted: #6d5741;
+      --gold: #c3923a;
+      --gold-light: #f3d890;
+      --red: #7c1e14;
+      --red-dark: #4e120c;
+      --line: rgba(80, 48, 23, 0.28);
+      --shadow: rgba(17, 10, 5, 0.28);
 
-      --fire: #b84a2b;
-      --water: #2f6f8f;
-      --earth: #4f6b3d;
-      --wind: #6f8790;
-      --shadowcolor: #5b456e;
-      --treasure: #c79a3b;
+      --fire: #b34a24;
+      --water: #1f6f8e;
+      --earth: #506f35;
+      --wind: #2d7f8f;
+      --shadowgate: #5c3b73;
+      --treasure: #c2922f;
     }
 
     * {
@@ -42,14 +44,16 @@
     body {
       margin: 0;
       font-family: Georgia, "Times New Roman", serif;
-      background: var(--bg);
-      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 0%, rgba(195, 146, 58, 0.18), transparent 34%),
+        linear-gradient(180deg, #1a2229 0%, #21180f 34%, #f4e3bf 34%, #f4e3bf 100%);
+      color: var(--ink);
       line-height: 1.65;
     }
 
     body::selection {
-      background: var(--gold-soft);
-      color: var(--text);
+      background: var(--gold-light);
+      color: var(--ink);
     }
 
     a {
@@ -57,49 +61,50 @@
     }
 
     header {
-      padding: 20px 7%;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      padding: 16px 7%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid var(--line);
-      background: rgba(247, 241, 230, 0.97);
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(243, 216, 144, 0.25);
+      background: rgba(16, 16, 20, 0.92);
+      backdrop-filter: blur(10px);
+      color: var(--parchment-light);
     }
 
     .logo {
       display: flex;
       flex-direction: column;
       text-decoration: none;
-      color: var(--accent);
+      color: var(--gold-light);
       line-height: 1.05;
     }
 
     .logo-main {
-      font-size: 26px;
-      letter-spacing: 2.8px;
+      font-size: 28px;
+      letter-spacing: 3px;
       font-weight: bold;
     }
 
     .logo-sub {
       font-size: 12px;
-      letter-spacing: 1.5px;
-      color: var(--gold);
+      letter-spacing: 2px;
+      color: var(--parchment);
       text-transform: uppercase;
-      margin-top: 4px;
+      margin-top: 5px;
     }
 
     nav a {
-      margin-left: 22px;
+      margin-left: 20px;
       font-size: 15px;
-      color: var(--muted);
+      color: rgba(255, 242, 207, 0.78);
       text-decoration: none;
     }
 
     nav a:hover {
-      color: var(--accent);
+      color: var(--gold-light);
     }
 
     main {
@@ -112,89 +117,122 @@
       margin: auto;
     }
 
+    h1,
+    h2,
+    h3 {
+      margin-top: 0;
+      color: var(--ink);
+    }
+
+    h1 {
+      font-size: clamp(42px, 6vw, 74px);
+      line-height: 1.02;
+      letter-spacing: 0.5px;
+      margin-bottom: 24px;
+      color: var(--gold-light);
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.42);
+    }
+
+    h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.12;
+      margin-bottom: 16px;
+    }
+
+    h3 {
+      font-size: 24px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 880px;
+    }
+
     .hero {
       max-width: none;
-      padding: 92px 7% 84px;
+      padding: 96px 7% 88px;
+      color: var(--parchment-light);
       background:
-        radial-gradient(circle at 92% 10%, rgba(180, 138, 69, 0.18), transparent 30%),
-        radial-gradient(circle at 10% 90%, rgba(31, 59, 77, 0.08), transparent 28%),
-        linear-gradient(180deg, #fff7e8 0%, var(--bg) 100%);
-      border-bottom: 1px solid var(--line);
+        radial-gradient(circle at 78% 20%, rgba(243, 216, 144, 0.26), transparent 24%),
+        radial-gradient(circle at 18% 72%, rgba(112, 52, 20, 0.42), transparent 30%),
+        linear-gradient(135deg, rgba(16,16,20,0.95), rgba(38, 26, 14, 0.86)),
+        linear-gradient(180deg, #111821, #2a1d0f);
+      border-bottom: 3px solid rgba(195, 146, 58, 0.36);
     }
 
     .hero-inner {
       max-width: 1180px;
       margin: auto;
       display: grid;
-      grid-template-columns: 1.12fr 0.88fr;
-      gap: 52px;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 54px;
       align-items: center;
     }
 
     .label {
       display: inline-block;
-      color: var(--gold);
+      color: var(--gold-light);
       font-size: 13px;
-      letter-spacing: 2px;
+      letter-spacing: 2.4px;
       text-transform: uppercase;
       margin-bottom: 18px;
       font-weight: bold;
     }
 
-    h1 {
-      font-size: clamp(42px, 6vw, 72px);
-      line-height: 1.05;
-      color: var(--accent);
-      margin: 0 0 24px;
-      max-width: 900px;
-    }
-
-    h2 {
-      font-size: clamp(31px, 4vw, 46px);
-      line-height: 1.15;
-      color: var(--accent);
-      margin: 0 0 18px;
-    }
-
-    h3 {
-      font-size: 24px;
-      color: var(--accent);
-      margin: 0 0 12px;
-    }
-
-    p {
-      color: var(--muted);
-      font-size: 18px;
-      max-width: 860px;
-    }
-
     .lead {
       font-size: 22px;
-      margin-bottom: 30px;
-      max-width: 800px;
+      color: rgba(255, 242, 207, 0.88);
+      margin-bottom: 28px;
     }
 
-    .hero-box {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 18px 40px var(--shadow);
+    .hero p {
+      color: rgba(255, 242, 207, 0.78);
     }
 
-    .hero-box strong {
-      color: var(--accent);
+    .button-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+      align-items: center;
     }
 
-    .hero-box ul {
-      margin: 18px 0 0;
-      padding-left: 22px;
-      color: var(--muted);
-      font-size: 17px;
+    .button {
+      display: inline-block;
+      padding: 14px 22px;
+      border-radius: 7px;
+      text-decoration: none;
+      font-size: 16px;
+      letter-spacing: 0.2px;
+      background: linear-gradient(180deg, #d7a64c, #a66f22);
+      color: #1c1208;
+      border: 1px solid rgba(243, 216, 144, 0.75);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.26);
+      font-weight: bold;
     }
 
-    .hero-box li {
-      margin-bottom: 9px;
+    .button:hover {
+      filter: brightness(1.06);
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--parchment-light);
+      border: 1px solid rgba(243, 216, 144, 0.65);
+      box-shadow: none;
+    }
+
+    .button.secondary:hover {
+      background: rgba(243, 216, 144, 0.08);
+    }
+
+    .mini-note {
+      color: rgba(255, 242, 207, 0.68);
+      font-size: 14px;
+      margin-top: 12px;
     }
 
     .badge-row {
@@ -205,104 +243,130 @@
     }
 
     .badge {
-      background: rgba(255, 250, 241, 0.9);
-      border: 1px solid var(--line);
-      color: var(--accent);
+      background: rgba(244, 227, 191, 0.08);
+      border: 1px solid rgba(243, 216, 144, 0.32);
+      color: var(--parchment-light);
       border-radius: 999px;
       padding: 8px 13px;
       font-size: 14px;
     }
 
-    .cta-row {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      align-items: center;
-      margin-top: 28px;
+    .quest-preview {
+      background:
+        linear-gradient(180deg, rgba(255,242,207,0.94), rgba(222,192,137,0.92));
+      border: 2px solid rgba(243, 216, 144, 0.68);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 28px 70px rgba(0,0,0,0.42);
+      color: var(--ink);
+      position: relative;
+      overflow: hidden;
     }
 
-    .button {
-      display: inline-block;
-      padding: 14px 22px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 16px;
-      letter-spacing: 0.2px;
-      background: var(--accent);
-      color: #fff;
-      border: 1px solid var(--accent);
+    .quest-preview::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border: 1px solid rgba(80, 48, 23, 0.35);
+      border-radius: 12px;
+      pointer-events: none;
     }
 
-    .button:hover {
-      background: var(--accent-dark);
-      border-color: var(--accent-dark);
+    .quest-preview h3 {
+      text-align: center;
+      font-size: 24px;
+      letter-spacing: 1.3px;
+      margin: 4px 0 18px;
     }
 
-    .button.secondary {
-      background: transparent;
-      color: var(--accent);
-      border: 1px solid var(--accent);
+    .gate-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      position: relative;
+      z-index: 2;
     }
 
-    .button.secondary:hover {
-      background: rgba(31, 59, 77, 0.08);
+    .gate-card {
+      min-height: 104px;
+      border: 1px solid rgba(80, 48, 23, 0.3);
+      border-radius: 12px;
+      padding: 12px;
+      background: rgba(255, 250, 241, 0.54);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.18);
     }
 
-    .mini-note {
-      color: var(--muted);
+    .gate-card strong {
+      display: block;
+      font-size: 17px;
+      margin-bottom: 2px;
+    }
+
+    .gate-card span {
+      display: block;
       font-size: 14px;
-      margin-top: 12px;
+      color: var(--muted);
+      line-height: 1.35;
     }
 
-    .notice {
-      background: #fffaf1;
+    .fire { border-top: 5px solid var(--fire); }
+    .water { border-top: 5px solid var(--water); }
+    .earth { border-top: 5px solid var(--earth); }
+    .wind { border-top: 5px solid var(--wind); }
+    .shadowgate { border-top: 5px solid var(--shadowgate); }
+    .treasure { border-top: 5px solid var(--treasure); }
+
+    .wide {
+      max-width: none;
+      background:
+        linear-gradient(180deg, rgba(255, 242, 207, 0.74), rgba(244, 227, 191, 0.98));
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .wide-inner {
+      max-width: 1180px;
+      margin: auto;
+    }
+
+    .card,
+    .print-box,
+    .notice,
+    .highlight {
+      background:
+        linear-gradient(180deg, rgba(255, 250, 241, 0.96), rgba(244, 227, 191, 0.78));
       border: 1px solid var(--line);
       border-radius: 16px;
-      padding: 24px;
+      box-shadow: 0 14px 32px rgba(47, 31, 16, 0.09);
+    }
+
+    .card {
+      padding: 30px;
+    }
+
+    .card p {
+      font-size: 17px;
+      margin-bottom: 0;
+    }
+
+    .highlight {
+      border-left: 5px solid var(--gold);
+      padding: 22px 24px;
       margin-top: 28px;
       color: var(--muted);
       font-size: 17px;
     }
 
+    .highlight strong,
     .notice strong {
-      color: var(--accent);
+      color: var(--ink);
     }
 
-    .process {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 10px;
-      margin-top: 34px;
-    }
-
-    .step {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 18px 14px;
-      text-align: center;
-      min-height: 132px;
-      box-shadow: 0 12px 24px var(--shadow);
-    }
-
-    .step-number {
-      width: 32px;
-      height: 32px;
-      margin: 0 auto 10px;
-      border-radius: 50%;
-      background: var(--gold-soft);
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 15px;
-    }
-
-    .step p {
-      font-size: 15px;
-      margin: 0;
+    .notice {
+      padding: 24px;
+      margin-top: 28px;
       color: var(--muted);
+      font-size: 17px;
     }
 
     .grid-3 {
@@ -319,34 +383,42 @@
       margin-top: 34px;
     }
 
-    .card {
-      background: var(--card);
+    .process {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      margin-top: 34px;
+    }
+
+    .step {
+      background: rgba(255, 250, 241, 0.84);
       border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 12px 28px var(--shadow);
+      border-radius: 14px;
+      padding: 18px 14px;
+      text-align: center;
+      min-height: 142px;
+      box-shadow: 0 12px 24px rgba(47, 31, 16, 0.08);
     }
 
-    .card p {
-      font-size: 17px;
-      margin-bottom: 0;
-    }
-
-    .card .small {
+    .step-number {
+      width: 34px;
+      height: 34px;
+      margin: 0 auto 10px;
+      border-radius: 50%;
+      background: var(--red);
+      color: var(--gold-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
       font-size: 15px;
-      margin-top: 12px;
+      border: 1px solid rgba(243, 216, 144, 0.5);
     }
 
-    .wide {
-      max-width: none;
-      background: var(--paper);
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .wide-inner {
-      max-width: 1180px;
-      margin: auto;
+    .step p {
+      font-size: 15px;
+      margin: 0;
+      color: var(--muted);
     }
 
     ul.clean {
@@ -369,52 +441,16 @@
       break-inside: avoid;
     }
 
-    .highlight {
-      border-left: 5px solid var(--gold);
-      background: #fffaf1;
-      padding: 22px 24px;
-      border-radius: 12px;
-      margin-top: 28px;
-      color: var(--muted);
-      font-size: 17px;
-    }
-
-    .highlight strong {
-      color: var(--accent);
-    }
-
-    .photo-placeholder {
-      border: 1px dashed var(--gold);
-      background: rgba(255, 250, 241, 0.75);
-      border-radius: 18px;
-      padding: 28px;
-      color: var(--muted);
-      font-size: 16px;
-      margin-top: 24px;
-    }
-
-    .photo-placeholder strong {
-      color: var(--accent);
-    }
-
-    .must-print {
+    .print-grid {
       display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
+      grid-template-columns: 0.95fr 1.05fr;
       gap: 28px;
       margin-top: 34px;
       align-items: start;
     }
 
     .print-box {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 16px;
       padding: 26px;
-      box-shadow: 0 12px 28px var(--shadow);
-    }
-
-    .print-box h3 {
-      font-size: 22px;
     }
 
     .print-box ul {
@@ -428,9 +464,34 @@
       margin-bottom: 8px;
     }
 
+    .strip {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .symbol {
+      text-align: center;
+      background: rgba(255, 250, 241, 0.86);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .symbol strong {
+      display: block;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
     .price-box {
-      background: var(--accent);
+      background:
+        linear-gradient(135deg, rgba(78,18,12,0.98), rgba(16,16,20,0.96));
       color: #fff;
+      border: 1px solid rgba(243, 216, 144, 0.32);
       border-radius: 18px;
       padding: 34px;
       margin-top: 34px;
@@ -438,24 +499,30 @@
       grid-template-columns: 1fr auto;
       gap: 28px;
       align-items: center;
+      box-shadow: 0 24px 55px rgba(17,10,5,0.24);
+    }
+
+    .price-box h3 {
+      color: var(--gold-light);
+      margin-bottom: 10px;
     }
 
     .price-box p {
-      color: rgba(255,255,255,0.82);
+      color: rgba(255, 242, 207, 0.78);
       margin: 0 0 10px;
     }
 
     .price {
       font-size: 52px;
       line-height: 1;
-      color: #fff;
+      color: var(--gold-light);
       white-space: nowrap;
       font-weight: bold;
     }
 
     .price-sub {
       font-size: 15px;
-      color: rgba(255,255,255,0.76);
+      color: rgba(255, 242, 207, 0.72);
       text-align: right;
       margin-top: 8px;
     }
@@ -478,56 +545,26 @@
       margin: 0;
     }
 
-    .element-row {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 10px;
-      margin-top: 28px;
-    }
-
-    .element {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 14px 10px;
-      text-align: center;
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .element strong {
-      display: block;
-      color: var(--accent);
-      margin-bottom: 4px;
-    }
-
-    .fire { border-top: 4px solid var(--fire); }
-    .water { border-top: 4px solid var(--water); }
-    .earth { border-top: 4px solid var(--earth); }
-    .wind { border-top: 4px solid var(--wind); }
-    .shadowel { border-top: 4px solid var(--shadowcolor); }
-    .treasure { border-top: 4px solid var(--treasure); }
-
     footer {
       padding: 38px 7%;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
+      border-top: 1px solid rgba(243,216,144,0.28);
+      color: rgba(255, 242, 207, 0.68);
       font-size: 14px;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 16px;
-      background: var(--paper-strong);
+      background: #101014;
     }
 
     footer a {
-      color: var(--muted);
+      color: rgba(255, 242, 207, 0.68);
       text-decoration: none;
       margin-left: 18px;
     }
 
     footer a:hover {
-      color: var(--accent);
+      color: var(--gold-light);
     }
 
     @media (max-width: 980px) {
@@ -535,7 +572,7 @@
       .grid-3,
       .grid-2,
       .price-box,
-      .must-print {
+      .print-grid {
         grid-template-columns: 1fr;
       }
 
@@ -543,7 +580,7 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .element-row {
+      .strip {
         grid-template-columns: repeat(2, 1fr);
       }
 
@@ -586,10 +623,14 @@
         columns: 1;
       }
 
-      .hero-box,
+      .gate-grid {
+        grid-template-columns: 1fr;
+      }
+
       .card,
       .price-box,
-      .print-box {
+      .print-box,
+      .notice {
         padding: 24px;
       }
 
@@ -606,7 +647,7 @@
   <header>
     <a class="logo" href="/">
       <span class="logo-main">TYRAEN</span>
-      <span class="logo-sub">Abenteuer</span>
+      <span class="logo-sub">Drachen · Tore · Schatzkammer</span>
     </a>
     <nav>
       <a href="#produkt">Produkt</a>
@@ -623,52 +664,67 @@
     <section class="hero">
       <div class="hero-inner">
         <div>
-          <div class="label">Schatzsuche zum Ausdrucken · 5–8 Jahre</div>
-          <h1>Kindergeburtstag ohne stundenlange Planung.</h1>
+          <div class="label">Drachen-Schatzsuche zum Ausdrucken · 5–9 Jahre</div>
+          <h1>Die sechs Tore zur Schatzkammer.</h1>
           <p class="lead">
-            <strong>ABENTEUERREISE by TYRAEN – Die sechs Türen zur Schatzkammer</strong>
-            ist ein druckfertiges 66-Seiten-PDF für Kindergeburtstag, Schatzsuche,
-            Schnitzeljagd und Familienabenteuer.
+            <strong>ABENTEUERREISE by TYRAEN</strong> ist ein druckbares Fantasy-Abenteuer
+            für Kindergeburtstage: mit Story, Gruppenführer-Anleitung, Torblättern,
+            Abenteuerausweisen, Zeichenkarte und Urkunde.
           </p>
 
           <p>
-            Du druckst die Seiten aus, schneidest Karten und Hinweise zu, packst sechs Umschläge
-            und führst die Kinder Schritt für Schritt durch ein fertiges Abenteuer.
+            Kein loses Rätselpaket. Kein überladener Bastelplan.
+            Der Gruppenführer liest die Geschichte vor, zeigt die Tore, startet die Missionen
+            und legt nach jedem bestandenen Tor ein Zeichen auf die Zeichenkarte.
           </p>
 
-          <div class="cta-row">
+          <div class="button-row">
             <a class="button" href="mailto:info@tyraen.de?subject=Interesse%20an%20ABENTEUERREISE%20by%20TYRAEN">
-              Testversion für 14 € anfragen
+              PDF-Set anfragen
             </a>
             <a class="button secondary" href="#ablauf">Ablauf ansehen</a>
           </div>
 
           <p class="mini-note">
-            Erste Verkaufsversion im lokalen Test. Anfrage aktuell per E-Mail.
+            Erste Verkaufsversion im Test. Anfrage aktuell per E-Mail. Etsy-Link kann später hier eingesetzt werden.
           </p>
 
           <div class="badge-row">
             <span class="badge">PDF zum Ausdrucken</span>
-            <span class="badge">für 5–8 Jahre</span>
+            <span class="badge">für 5–9 Jahre</span>
             <span class="badge">drinnen & draußen</span>
-            <span class="badge">Plan B bei Regen</span>
+            <span class="badge">10 farbige Kernseiten</span>
           </div>
         </div>
 
-        <div class="hero-box">
-          <h3>Das Prinzip</h3>
-          <p>
-            Kein loses Rätselpaket. Kein „denk dir selbst noch Spiele aus“.
-            Das Set liefert einen vorbereiteten Ablauf für Eltern.
-          </p>
-          <ul>
-            <li>sechs Türen bis zur Schatzkammer</li>
-            <li>Schatzkarte, Ausweise, Türkarten und Hinweise</li>
-            <li>Urkunden pro Kind mehrfach druckbar</li>
-            <li>Einladungen und Mitgebsel-Anhänger enthalten</li>
-            <li>Notfallkarten für Chaos, Zeitdruck und schwierige Rätsel</li>
-            <li>Schlechtwetter-Umbau für Wohnung oder Innenräume</li>
-          </ul>
+        <div class="quest-preview">
+          <h3>Die Reise</h3>
+          <div class="gate-grid">
+            <div class="gate-card fire">
+              <strong>1. Feuertor</strong>
+              <span>Lavadrache · Lavapfad</span>
+            </div>
+            <div class="gate-card water">
+              <strong>2. Wassertor</strong>
+              <span>Wasserhydra · Wasserprüfung</span>
+            </div>
+            <div class="gate-card earth">
+              <strong>3. Erdtor</strong>
+              <span>Steinriese · Steinprüfung</span>
+            </div>
+            <div class="gate-card wind">
+              <strong>4. Windtor</strong>
+              <span>Sturmwandler · Windprüfung</span>
+            </div>
+            <div class="gate-card shadowgate">
+              <strong>5. Schattentor</strong>
+              <span>Schattenwesen · Schattenprüfung</span>
+            </div>
+            <div class="gate-card treasure">
+              <strong>6. Schatzkammer</strong>
+              <span>Schatzdrache · Finale</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -676,47 +732,23 @@
     <section id="produkt">
       <h2>Was ist die Abenteuerreise?</h2>
       <p>
-        Die Abenteuerreise ist ein vorbereiteter Kindergeburtstags-Ablauf als PDF.
-        Eltern müssen kein eigenes Programm entwickeln, sondern folgen einer klaren Reihenfolge:
-        vorbereiten, Umschläge packen, Geschichte vorlesen, Stationen spielen, Schatz finden.
+        Die Abenteuerreise ist ein vorbereiteter Spielablauf für den Hauptteil eines Kindergeburtstags.
+        Die Kinder gehen als gemeinsames Abenteurerteam durch sechs Tore und öffnen am Ende die Schatzkammer.
       </p>
 
       <div class="highlight">
-        <strong>Der Nutzen:</strong> weniger Planung, weniger Improvisation, mehr Struktur.
-        Die PDF soll Eltern nicht beeindrucken, sondern ihnen Arbeit abnehmen.
+        <strong>Der Kern:</strong> Der Erwachsene führt. Die Kinder spielen.
+        Die Zeichenkarte zeigt den Fortschritt. Nach jedem bestandenen Tor wird ein Zeichen gelegt.
+        Dadurch bleibt der Ablauf sichtbar und einfach.
       </div>
 
-      <div class="element-row">
-        <div class="element fire">
-          <strong>Feuer</strong>
-          Mut & Start
-        </div>
-        <div class="element water">
-          <strong>Wasser</strong>
-          Ruhe & Geduld
-        </div>
-        <div class="element earth">
-          <strong>Erde</strong>
-          Teamarbeit
-        </div>
-        <div class="element wind">
-          <strong>Wind</strong>
-          Denken & Zuhören
-        </div>
-        <div class="element shadowel">
-          <strong>Schatten</strong>
-          Wahrnehmung
-        </div>
-        <div class="element treasure">
-          <strong>Schatz</strong>
-          Abschluss
-        </div>
-      </div>
-
-      <div class="photo-placeholder">
-        <strong>Bildempfehlung für diese Stelle:</strong><br>
-        echtes Foto vom ausgedruckten Material auf dem Tisch:
-        Schatzkarte, sechs Umschläge, Schere, Stift, Kompass und Karten.
+      <div class="strip">
+        <div class="symbol fire"><strong>Feuer</strong>Bewegung</div>
+        <div class="symbol water"><strong>Wasser</strong>Geschick</div>
+        <div class="symbol earth"><strong>Erde</strong>Teamarbeit</div>
+        <div class="symbol wind"><strong>Wind</strong>Zuhören</div>
+        <div class="symbol shadowgate"><strong>Schatten</strong>Wahrnehmung</div>
+        <div class="symbol treasure"><strong>Schatz</strong>Finale</div>
       </div>
     </section>
 
@@ -726,21 +758,21 @@
         <div class="card">
           <h3>Für Eltern mit wenig Zeit</h3>
           <p>
-            Wenn der Geburtstag näherkommt, aber noch kein Spielprogramm vorbereitet ist.
+            Wenn ein Kindergeburtstag ansteht und der Spielteil schnell vorbereitet werden soll.
           </p>
         </div>
 
         <div class="card">
-          <h3>Für unsichere Gastgeber</h3>
+          <h3>Für klare Durchführung</h3>
           <p>
-            Wenn du nicht frei improvisieren möchtest, sondern eine klare Anleitung brauchst.
+            Der Gruppenführer bekommt Texte, Aufgaben, Varianten und Soforthilfen für typische Situationen.
           </p>
         </div>
 
         <div class="card">
-          <h3>Für Familien mit Plan B</h3>
+          <h3>Für gemischte Gruppen</h3>
           <p>
-            Wenn Garten, Wohnung, Regen, Zeitdruck oder unruhige Kinder vorher mitgedacht sein sollen.
+            Mit leichter Version, Normalvariante, Bonusaufgabe und Abkürzung bei Zeitdruck.
           </p>
         </div>
       </div>
@@ -750,44 +782,44 @@
       <div class="wide-inner">
         <h2>So funktioniert es</h2>
         <p>
-          Die Abenteuerreise folgt einem einfachen Ablauf. Eltern müssen keine eigene Spielgeschichte
-          entwickeln, sondern bereiten das Set anhand der Anleitung vor.
+          Der Ablauf bleibt bewusst einfach. Es gibt keine zusätzliche Mechanik, die Eltern verwirrt.
+          Die Torblätter, die Zeichenkarte und die Gruppenführer-Texte reichen aus.
         </p>
 
         <div class="process">
           <div class="step">
             <div class="step-number">1</div>
-            <p>Drucken</p>
+            <p>Farbdruckseiten und Anleitung drucken</p>
           </div>
 
           <div class="step">
             <div class="step-number">2</div>
-            <p>Schneiden</p>
+            <p>Ausweise ausschneiden und Material bereitlegen</p>
           </div>
 
           <div class="step">
             <div class="step-number">3</div>
-            <p>Umschläge packen</p>
+            <p>Schatzkarte zeigen und Startbrief vorlesen</p>
           </div>
 
           <div class="step">
             <div class="step-number">4</div>
-            <p>Geschichte vorlesen</p>
+            <p>Torblatt zeigen und Mission erklären</p>
           </div>
 
           <div class="step">
             <div class="step-number">5</div>
-            <p>Sechs Türen spielen</p>
+            <p>Mission spielen und Tor bestehen</p>
           </div>
 
           <div class="step">
             <div class="step-number">6</div>
-            <p>Schatz finden</p>
+            <p>Zeichen auf die Zeichenkarte legen</p>
           </div>
 
           <div class="step">
             <div class="step-number">7</div>
-            <p>Urkunden verteilen</p>
+            <p>Schatzkammer öffnen und Urkunden verteilen</p>
           </div>
         </div>
       </div>
@@ -796,93 +828,97 @@
     <section id="inhalt">
       <h2>Was ist enthalten?</h2>
       <p>
-        Die aktuelle Verkaufsversion umfasst 66 Seiten im A4-Format. Sie kombiniert
-        klare Elternseiten mit dekorativem Spielmaterial zum Ausschneiden.
+        Die aktuelle Version ist als dreiteiliges PDF-Set aufgebaut: ein Elternhandbuch,
+        ein Spielbuch für den Gruppenführer und ein Farbdruck-Set mit den wichtigsten Spielseiten.
       </p>
 
+      <div class="grid-3">
+        <div class="card">
+          <h3>Start-Hier</h3>
+          <p>
+            Vorbereitung, Minimaldruck, Materialliste, Rollen, Teams, Zeichenkarte,
+            Zeitsteuerung und Soforthilfe.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Spielbuch</h3>
+          <p>
+            Gesamtstory, Startbrief, Kinderregeln, Vorlesetexte je Tor,
+            Aufgaben, Varianten und Finaltext.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Druckvorlagen</h3>
+          <p>
+            Schatzkarte, Zeichenkarte, Abenteuerausweise, sechs Torblätter,
+            Schatzkammer und Urkunde.
+          </p>
+        </div>
+      </div>
+
       <ul class="clean checklist">
-        <li>kompletter Ablauf für einen Kindergeburtstag</li>
-        <li>Abenteuer-Cover</li>
-        <li>Schatzkarte</li>
-        <li>Abenteuerausweise</li>
-        <li>Türkarten für sechs Stationen</li>
-        <li>Stationskarten und Schmuckübersicht</li>
-        <li>Questkarten, Hinweise und Ortsschilder</li>
-        <li>Urkunden pro Kind druckbar</li>
-        <li>Einladungen: 2 pro Seite</li>
-        <li>Mitgebsel-Anhänger mit Schnurhinweis</li>
-        <li>Schatzkammer-Einkaufsliste</li>
-        <li>Materialliste</li>
-        <li>Packplan für sechs Umschläge</li>
-        <li>Druck- und Schneideplan</li>
-        <li>Eltern-Spickzettel</li>
-        <li>Notfallkarten</li>
-        <li>Eltern-Belohnungskarten</li>
+        <li>Gruppenführer-Anleitung</li>
+        <li>Startbrief: Der Ruf des Schatzdrachen</li>
+        <li>Kinderregeln für den Spielstart</li>
+        <li>Schatzkarte als Orientierung</li>
+        <li>Zeichenkarte als Fortschrittssystem</li>
+        <li>Abenteuerausweise mit Rollen</li>
+        <li>6 A4-Torblätter im Fantasy-Stil</li>
+        <li>Urkunde für den Abschluss</li>
+        <li>Materialliste mit Praxisreserve</li>
+        <li>Leicht-, Normal-, Bonus- und Schnellversion</li>
         <li>Schlechtwetter-Umbau</li>
-        <li>Familien-Modus</li>
-        <li>Elternquests</li>
-        <li>5–6-Jahre-Variante</li>
-        <li>7–8-Jahre-Rätselvariante</li>
-        <li>Lösungsblatt</li>
-        <li>60-Minuten-Kurzversion</li>
-        <li>120–180-Minuten-Familien-Edition</li>
-        <li>Druckerspar-Seiten</li>
-        <li>Abschluss-Checkliste und Feedbackbogen</li>
-        <li>Nutzungshinweise / keine Weitergabe</li>
+        <li>Soforthilfe, wenn Kinder nicht zuhören</li>
+        <li>Zwei-Team-Modus für größere Gruppen</li>
+        <li>Nutzungshinweise für private Verwendung</li>
       </ul>
     </section>
 
     <section id="druck" class="wide">
       <div class="wide-inner">
-        <h2>Du musst nicht alle 66 Seiten drucken.</h2>
+        <h2>Was muss wirklich gedruckt werden?</h2>
         <p>
-          Die PDF enthält Pflichtseiten, optionale Seiten, Schmuckseiten, Varianten und Druckerspar-Seiten.
-          Für eine schnelle Version reicht der Kern. Zusätzliche Seiten machen das Set schöner,
-          flexibler oder leichter für bestimmte Situationen.
+          Für den Spielteil reicht der Kern. Die Elternseiten können schwarz-weiß gedruckt oder am Bildschirm gelesen werden.
+          Die Farbdruckseiten erzeugen die Abenteuerwirkung für die Kinder.
         </p>
 
-        <div class="must-print">
+        <div class="print-grid">
           <div class="print-box">
-            <h3>Kernseiten</h3>
-            <p>
-              Für den schnellen Start druckst du nur die Seiten, die du für Ablauf,
-              Stationen, Hinweise und Abschluss brauchst.
-            </p>
+            <h3>Farbdruck-Kernseiten</h3>
             <ul>
-              <li>Eltern-Spickzettel</li>
-              <li>Einstiegsgeschichte</li>
-              <li>Schatzkarte</li>
-              <li>Türkarten</li>
-              <li>Stationskarten</li>
-              <li>Hinweise / Schatzsatz</li>
               <li>Abenteuerausweise</li>
-              <li>Urkunden</li>
+              <li>Zeichenkarte</li>
+              <li>Schatzkarte</li>
+              <li>Feuertor</li>
+              <li>Wassertor</li>
+              <li>Erdtor</li>
+              <li>Windtor</li>
+              <li>Schattentor</li>
+              <li>Schatzkammer</li>
+              <li>Urkunde</li>
             </ul>
           </div>
 
           <div class="print-box">
-            <h3>Optionale Seiten</h3>
-            <p>
-              Diese Seiten helfen, wenn du mehr Zeit, mehr Kinder, schlechtes Wetter
-              oder einen schöneren Abschluss einplanen möchtest.
-            </p>
+            <h3>Anleitung / Spielbuch</h3>
             <ul>
-              <li>Einladungen</li>
-              <li>Mitgebsel-Anhänger</li>
-              <li>Notfallkarten</li>
-              <li>Elternquests</li>
-              <li>Familien-Modus</li>
-              <li>Schlechtwetter-Umbau</li>
-              <li>Druckerspar-Seiten</li>
-              <li>Feedbackbogen</li>
+              <li>Eltern-Kurzablauf</li>
+              <li>Startbrief</li>
+              <li>Regeln für Kinder</li>
+              <li>Vorlesetexte je Tor</li>
+              <li>Aufgabenvarianten</li>
+              <li>Materialliste</li>
+              <li>Soforthilfe bei Chaos</li>
+              <li>Finaltext</li>
             </ul>
           </div>
         </div>
 
         <div class="notice">
-          <strong>Praktischer Hinweis:</strong> Die Urkunden-Seite kann pro Kind einmal gedruckt werden.
-          Die Einladungen sind 2 pro Seite angelegt. Mitgebsel-Anhänger enthalten eine Lochmarkierung
-          für Schnur oder Geschenkband.
+          <strong>Praktischer Einsatz:</strong> Die Torblätter werden an den Stationen gezeigt oder aufgehängt.
+          Nach jedem bestandenen Tor wird das passende Zeichen auf die Zeichenkarte gelegt.
         </div>
       </div>
     </section>
@@ -893,81 +929,48 @@
         <div class="card">
           <h3>Weniger Planung</h3>
           <p>
-            Geschichte, Stationen, Karten, Lösungen und Ablauf sind bereits vorbereitet.
+            Story, Ablauf, Aufgaben, Material und Varianten sind vorbereitet.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Weniger Chaos</h3>
+          <p>
+            Der Ablauf folgt immer demselben Muster: Tor zeigen, Aufgabe erklären, spielen, Zeichen legen.
           </p>
         </div>
 
         <div class="card">
           <h3>Mehr Sicherheit</h3>
           <p>
-            Eltern wissen vorher, was wann passiert und was sie bereitlegen müssen.
+            Wenn Zeit knapp wird oder Kinder unruhig sind, gibt es klare Abkürzungen und Soforthilfen.
           </p>
         </div>
-
-        <div class="card">
-          <h3>Mehr Spielzeit</h3>
-          <p>
-            Die Energie geht nicht in die Planung, sondern in den Geburtstag selbst.
-          </p>
-        </div>
-      </div>
-
-      <div class="photo-placeholder">
-        <strong>Bildempfehlung für diese Stelle:</strong><br>
-        Foto von sechs vorbereiteten Umschlägen mit den Türnummern 1–6.
       </div>
     </section>
 
     <section class="wide">
       <div class="wide-inner">
-        <h2>Auch wenn es regnet oder chaotisch wird</h2>
+        <h2>Auch wenn es regnet oder unruhig wird</h2>
         <p>
-          Kindergeburtstage laufen selten exakt nach Plan. Deshalb enthält das Set Zusatzhilfen
-          für typische Problemsituationen: schlechtes Wetter, Zeitdruck, unruhige Kinder oder
-          zu schwierige Rätsel.
+          Kindergeburtstage laufen selten exakt nach Plan. Das Set enthält deshalb einfache Alternativen
+          für Wohnung, Garten, Zeitdruck, unterschiedliche Altersstufen und unruhige Gruppen.
         </p>
 
         <div class="grid-2">
           <div class="card">
             <h3>Schlechtwetter-Umbau</h3>
             <p>
-              Der Ablauf kann in Wohnung, Hausflur, Wohnzimmer oder überdachten Bereichen gespielt werden.
+              Die Missionen können mit einfachen Haushaltsmaterialien nach innen verlegt werden.
             </p>
           </div>
 
           <div class="card">
-            <h3>Notfallkarten</h3>
+            <h3>Gruppenführer-Hilfe</h3>
             <p>
-              Wenn die Gruppe stockt, ein Rätsel zu schwer ist oder die Stimmung kippt,
-              gibt es einfache Hilfen für Erwachsene.
+              Klare Sätze, Startsignal, Wiederholungsfrage und Schnellversion helfen, wenn Kinder nicht zuhören.
             </p>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Varianten im Set</h2>
-      <div class="grid-3">
-        <div class="card">
-          <h3>60-Minuten-Kurzversion</h3>
-          <p>
-            Für wenig Zeit, kleine Gruppen oder spontane Einsätze.
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>120–180-Minuten-Familien-Edition</h3>
-          <p>
-            Für längere Nachmittage mit mehr Vorlesen, Rätseln und gemeinsamer Schatzsuche.
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>7–8-Jahre-Rätselvariante</h3>
-          <p>
-            Für ältere Kinder mit etwas mehr Anspruch und weniger Hilfestellung.
-          </p>
         </div>
       </div>
     </section>
@@ -976,65 +979,58 @@
       <h2>FAQ</h2>
 
       <div class="faq-item">
-        <h3>Muss ich alle 66 Seiten drucken?</h3>
+        <h3>Muss ich alles farbig drucken?</h3>
         <p>
-          Nein. Die PDF enthält Pflichtseiten, optionale Seiten, Schmuckseiten und Druckerspar-Seiten.
-          Für die schnelle Version brauchst du nur den Kern des Abenteuers.
+          Nein. Sinnvoll farbig sind vor allem die zehn Kernseiten für die Kinder.
+          Die Anleitung kann schwarz-weiß gedruckt oder am Bildschirm gelesen werden.
         </p>
       </div>
 
       <div class="faq-item">
         <h3>Brauche ich besonderes Material?</h3>
         <p>
-          Nein. Zusätzlich brauchst du einfache Dinge wie Umschläge, Schere, Stifte und einen kleinen Schatz
-          oder Mitgebsel. Optional sind Schnur, Geschenkband, kleine Tüten, ein Locher oder ein Kinderkompass.
+          Nein. Typisch sind Schere, Stifte, Schnur, eine kleine Schatzkiste oder ein Beutel,
+          Löffel, Schüsseln, Bauklötze und ein paar einfache Gegenstände für die Schattenprüfung.
         </p>
       </div>
 
       <div class="faq-item">
         <h3>Ist das Set für draußen oder drinnen?</h3>
         <p>
-          Beides. Es gibt einen normalen Abenteuerablauf und einen Schlechtwetter-Umbau für Wohnung oder Innenräume.
+          Beides. Der normale Ablauf funktioniert draußen besonders gut.
+          Für schlechtes Wetter gibt es einfache Innenraum-Varianten.
         </p>
       </div>
 
       <div class="faq-item">
         <h3>Für welches Alter ist es gedacht?</h3>
         <p>
-          Hauptsächlich für Kinder von etwa 5 bis 8 Jahren. Für jüngere Kinder gibt es einfachere Varianten,
-          für 7–8 Jahre eine etwas schwierigere Rätselvariante.
+          Hauptsächlich für Kinder von etwa 5 bis 9 Jahren.
+          Jüngere Kinder bekommen leichtere Varianten, ältere Kinder Bonusaufgaben.
         </p>
       </div>
 
       <div class="faq-item">
-        <h3>Wie lange dauert die Vorbereitung?</h3>
+        <h3>Wie lange dauert das Spiel?</h3>
         <p>
-          Das hängt davon ab, wie ordentlich du schneiden und vorbereiten möchtest. Ziel ist:
-          drucken, schneiden, Umschläge packen und loslegen, ohne selbst ein komplettes Spiel entwickeln zu müssen.
+          Realistisch sind etwa 45 bis 90 Minuten für das Hauptspiel, abhängig von Gruppe,
+          Wetter, Tempo und Anzahl der Zusatzaufgaben.
         </p>
       </div>
 
       <div class="faq-item">
-        <h3>Ist es ein fertiger Kindergeburtstag?</h3>
+        <h3>Ist es ein kompletter Kindergeburtstag?</h3>
         <p>
-          Es ist ein geführter Abenteuerablauf für den Spielteil des Geburtstags. Essen, Kuchen,
-          Geschenke und Schatzinhalt organisierst du zusätzlich.
-        </p>
-      </div>
-
-      <div class="faq-item">
-        <h3>Was ist, wenn ein Rätsel zu schwer ist?</h3>
-        <p>
-          Dafür gibt es Lösungsblatt, Notfallkarten und einfachere Varianten. Erwachsene können jederzeit
-          helfen, ohne das Abenteuer zu unterbrechen.
+          Es ist ein geführter Abenteuerablauf für den Spielteil.
+          Essen, Kuchen, Geschenke und Schatzinhalt organisierst du zusätzlich.
         </p>
       </div>
 
       <div class="faq-item">
         <h3>Darf ich die Datei weitergeben?</h3>
         <p>
-          Nein. Das Set ist zur privaten Nutzung für den eigenen Geburtstag oder Familiennachmittag gedacht.
-          Eine Weitergabe, Veröffentlichung oder Weiterverteilung ist nicht vorgesehen.
+          Nein. Das Set ist für private Nutzung bei einem eigenen Geburtstag oder Familiennachmittag gedacht.
+          Weitergabe, Veröffentlichung oder Weiterverteilung sind nicht vorgesehen.
         </p>
       </div>
     </section>
@@ -1043,28 +1039,28 @@
       <div class="wide-inner">
         <h2>Erste Verkaufsversion im Test</h2>
         <p>
-          Die ABENTEUERREISE by TYRAEN wird aktuell als erste Verkaufsversion getestet.
-          Du erhältst das druckfertige PDF direkt per E-Mail.
+          Die ABENTEUERREISE by TYRAEN ist aktuell als erste Verkaufsversion verfügbar.
+          Du erhältst das druckbare PDF-Set direkt per E-Mail.
         </p>
 
         <div class="price-box">
           <div>
-            <h3 style="color:#fff; margin-bottom:10px;">Testpreis</h3>
+            <h3>Testpreis</h3>
             <p>
-              Umfangreiches 66-Seiten-Komplettset als PDF. Kein Shop notwendig.
+              Dreiteiliges PDF-Set mit Elternhandbuch, Spielbuch und Farbdruck-Vorlagen.
               Anfrage und Abwicklung zunächst direkt per E-Mail.
             </p>
             <p>
-              Späterer regulärer Preis voraussichtlich: 19 €.
+              Später kann hier der Etsy-Link eingesetzt werden.
             </p>
           </div>
           <div>
             <div class="price">14 €</div>
-            <div class="price-sub">erste Testversion</div>
+            <div class="price-sub">erste Verkaufsversion</div>
           </div>
         </div>
 
-        <div class="cta-row">
+        <div class="button-row">
           <a class="button" href="mailto:info@tyraen.de?subject=Interesse%20an%20ABENTEUERREISE%20by%20TYRAEN">
             PDF-Set anfragen
           </a>
@@ -1072,9 +1068,8 @@
         </div>
 
         <div class="notice">
-          Hinweis: Die Testversion dient dazu, echtes Elternfeedback zu sammeln.
-          Es wird kein perfekter Kindergeburtstag versprochen. Das Set liefert einen klaren,
-          vorbereiteten Spielablauf und praktische Hilfen für Vorbereitung und Durchführung.
+          Hinweis: Das Set verspricht keinen perfekten Kindergeburtstag.
+          Es liefert einen klaren Spielablauf, starke Druckseiten und praktische Führung für Erwachsene.
         </div>
       </div>
     </section>
@@ -1091,3 +1086,15 @@
 
 </body>
 </html>
+'''
+out = Path('/mnt/data/index_v6_3_tyraen.html')
+out.write_text(html, encoding='utf-8')
+
+# Basic checks requested by the user: no old mechanics and proper umlauts in source.
+checks = {
+    "Hinweis": "Hinweis" in html,
+    "Umsch": "Umsch" in html,
+    "Tür": "Tür" in html or "Türen" in html,
+    "äöüß_present": any(ch in html for ch in "äöüß"),
+}
+out, checks
